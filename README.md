@@ -20,9 +20,7 @@ This project implements **JWT authentication**, **role-based access control**, *
 
 ---
 
-## 📂 Project Structure
-
-weather_api/
+weather_api/ # Main project folder
 │
 ├── weather_api/ # Project settings
 │ ├── settings.py # DRF & JWT configuration
@@ -36,9 +34,9 @@ weather_api/
 │ ├── urls.py # App-specific routes
 │ ├── tests.py # Unit tests
 │
-├── manage.py
-├── requirements.txt
-└── README.md
+├── manage.py # Django management script
+├── requirements.txt # Python dependencies
+└── README.md # Project documentation
 
 
 ---
