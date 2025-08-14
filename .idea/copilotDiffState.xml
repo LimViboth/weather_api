@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/settings.py">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/settings.py" />
+              <option name="updatedContent" value="// ...existing code...&#10;    'weather.apps.WeatherConfig',&#10;    'rest_framework',&#10;    # Removed duplicate 'weather' entry&#10;// ...existing code..." />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
