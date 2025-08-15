@@ -24,9 +24,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-m#)q@_n6r6j^t1u&eb7%*v5p+67nr&48l(iglwbq)n58n%%via')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS', '*').split(",")]
+DEBUG = True
+
+
+# Allow comma-separated hosts in the ALLOWED_HOSTS env var. Example: "example.com,api.example.com"
+# If not provided, default to ['*'] for development.
+_allowed = os.environ.get('ALLOWED_HOSTS')
+if _allowed:
+    ALLOWED_HOSTS = [h.strip() for h in _allowed.split(',') if h.strip()]
+else:
+    ALLOWED_HOSTS = ['*']
 
 
 # Application definition
