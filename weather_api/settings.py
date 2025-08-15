@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import dj_database_url
 import os
+import json
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,11 +29,25 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-m#)q@_n6r6j^t1
 DEBUG = True
 
 
-# Allow comma-separated hosts in the ALLOWED_HOSTS env var. Example: "example.com,api.example.com"
+# Allow several formats for ALLOWED_HOSTS via env var:
+# - Comma separated string: "example.com,api.example.com"
+# - JSON array string: "[\"example.com\", \"api.example.com\"]"
+# - Single host string: "example.com"
 # If not provided, default to ['*'] for development.
 _allowed = os.environ.get('ALLOWED_HOSTS')
 if _allowed:
-    ALLOWED_HOSTS = [h.strip() for h in _allowed.split(',') if h.strip()]
+    try:
+        _s = _allowed.strip()
+        if _s.startswith('['):
+            # JSON array
+            parsed = json.loads(_s)
+            ALLOWED_HOSTS = [str(h).strip() for h in parsed if str(h).strip()]
+        else:
+            # comma separated OR single host
+            ALLOWED_HOSTS = [h.strip() for h in _allowed.split(',') if h.strip()]
+    except Exception:
+        # Fallback: treat whole string as single host
+        ALLOWED_HOSTS = [_allowed.strip()]
 else:
     ALLOWED_HOSTS = ['*']
 
