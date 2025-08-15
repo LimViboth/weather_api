@@ -16,7 +16,7 @@ A simple REST API for managing cities, weather records and user favorite cities 
 ```powershell
 # create venv (if not already created)
 py -3 -m venv venv
-; .\venv\Scripts\Activate.ps1
+venv\Scripts\activate
 
 # install dependencies
 pip install -r requirements.txt
