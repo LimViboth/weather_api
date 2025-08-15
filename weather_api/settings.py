@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import dj_database_url
 import os
 import json
+from urllib.parse import urlparse
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -50,6 +51,18 @@ if _allowed:
         ALLOWED_HOSTS = [_allowed.strip()]
 else:
     ALLOWED_HOSTS = ['*']
+
+# If running on Render, automatically add the external hostname to ALLOWED_HOSTS
+# Render exposes the public URL in RENDER_EXTERNAL_URL, e.g. https://my-service.onrender.com
+_render_url = os.environ.get('RENDER_EXTERNAL_URL')
+if _render_url:
+    try:
+        parsed = urlparse(_render_url)
+        host = parsed.hostname
+        if host and host not in ALLOWED_HOSTS:
+            ALLOWED_HOSTS.append(host)
+    except Exception:
+        pass
 
 
 # Application definition
