@@ -85,7 +85,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
         },
-    },
+    },  
 ]
 
 WSGI_APPLICATION = 'weather_api.wsgi.application'
